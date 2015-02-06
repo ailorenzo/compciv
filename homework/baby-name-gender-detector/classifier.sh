@@ -20,19 +20,18 @@ f_count=0
 
 	total_babies=$((f_count + m_count))
 
-	if [[ $total_babies -gt 0 ]]; then
-	pct_female=$((100 * f_count / total_babies))
-	pct_male=$((100 * m_count / total_babies))
-	else
-	gender_and_pct="NA,0"
-	fi
-
-
-	if [[ $pct_female -ge 50 ]]; then
+	if [[ $total_babies -le 0 ]]; then
+	  gender_and_pct="NA,0"
+        else
+  	  pct_female=$((100 * f_count / total_babies))
+	  pct_male=$((100 * m_count / total_babies))
+	
+    	   if [[ $pct_female -ge 50 ]]; then
 		gender_and_pct="F,$pct_female"
-	elif [[ $pct_male -gt 50 ]]; then
+	   elif [[ $pct_male -gt 50 ]]; then
 		gender_and_pct="M,$pct_male"
-	fi
+	   fi
+        fi
 
 	echo "$name,$gender_and_pct,$total_babies"
 done
